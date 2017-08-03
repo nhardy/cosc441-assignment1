@@ -3,8 +3,8 @@ SRC_DIR = .
 TMP_DIR = .tmp
 OUT_DIR = bin
 CC = gcc
-C_FLAGS = -g
-LD_FLAGS = -g -lpthread
+C_FLAGS =
+LD_FLAGS = -pthread
 EXECUTABLES = $(patsubst %,$(OUT_DIR)/%, $(PROGRAMS))
 
 test: $(EXECUTABLES)
@@ -16,15 +16,15 @@ single:	$(OUT_DIR)/single
 .PHONY: single
 
 thread: $(OUT_DIR)/thread
-	$(OUT_DIR)/thread
+	$(OUT_DIR)/thread 8
 .PHONY: thread
 
 mutex: $(OUT_DIR)/mutex
-	$(OUT_DIR)/mutex
+	$(OUT_DIR)/mutex 8
 .PHONY: mutex
 
 atomic: $(OUT_DIR)/atomic
-	$(OUT_DIR)/atomic
+	$(OUT_DIR)/atomic 8
 .PHONY: atomic
 
 $(OUT_DIR):
