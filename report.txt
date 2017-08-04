@@ -36,6 +36,19 @@ atomic	6	20m22.240	3m29.411	yes
 atomic	7	22m55.364	3m24.177	yes
 atomic	8	23m34.580	3m11.081	yes
 
+Modified (10000 -> 100 repetitions):
+
+version	N	CPU time	real time	correct
+-------|-------|---------------|---------------|-------|
+mutex	1	0m01.772	0m01.782	yes
+mutex	2	0m17.440	0m08.732	yes
+mutex	3	0m17.680	0m06.238	yes
+mutex	4	0m39.096	0m10.610	yes
+mutex	5	0m47.092	0m10.167	yes
+mutex	6	1m03.268	0m11.614	yes
+mutex	7	1m13.024	0m11.565	yes
+mutex	8	1m24.824	0m11.872	yes
+
 Commentary
 ==========
 
@@ -49,7 +62,7 @@ With N > 1, this variant no longer calculates the correct result, likely a resul
 Mutex:
 The mutex variant running with a single thread completes correctly in just under 3 minutes. This indicates that the process of locking an unlocking a mutex is an expensive operation.
 With N = 2, the program takes significantly longer, completing correctly in just over 17 minutes. CPU time here was just under 34 minutes. These measurements, which are more than double that of when N =1, suggest that interacting with a highly contested shared resource, in this case locking and unlocking the mutex, is extremely expensive relatively speaking.
-For N > 2, the program did not complete within 20 minutes, so this has been indicated with DNF (Did Not Finish) in the table. With a limited set of measurements, it is difficult to estimate how a greater number of threads would affect the running time (in terms of Big-O notation), but the data points present suggest a progression worse than linear.
+For N > 2, the program did not complete within 20 minutes, so this has been indicated with DNF (Did Not Finish) in the first table. Reducing the number of repetitions to 100 from 10000 allows observation of this trend. With the second table, it is clear that there is a significant increase in real time between N = 1 and N = 2, but onwards, this seems to trend upward far more slowly. CPU time is proportional to N.
 
 Atomic:
 The atomic variant running with a single thread completes correctly in just over 1 minute and 21 seconds. This indicates atomic operations are less expensive than use of a mutex, but are still a performance hit.

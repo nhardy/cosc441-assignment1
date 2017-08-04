@@ -27,11 +27,11 @@ void * Worker(void * ctxt) {
 int main(int argc, char * argv[]) {
   if (argc != 2) {
     fprintf(stderr, "Error: Must be called with number of threads.\n");
-    exit(-1);
+    exit(EXIT_FAILURE);
   }
 
   int N = atoi(argv[1]);
-  int repeat = 10000;
+  int repeat = 100;
   int repetitions_per_thread = repeat / N;
   int excess = repeat % N;
 
@@ -46,7 +46,7 @@ int main(int argc, char * argv[]) {
 
     if (e) {
       fprintf(stderr, "Error: Could not create threads.\n%i\n", e);
-      exit(-1);
+      exit(EXIT_FAILURE);
     }
   }
 
@@ -57,13 +57,12 @@ int main(int argc, char * argv[]) {
 
     if (e) {
       fprintf(stderr, "Error: Could not join threads.\n");
-      exit(-1);
+      exit(EXIT_FAILURE);
     }
   }
 
   pthread_mutex_destroy(&mutex_total);
 
   printf("%lli\n", total);
-
-  return 0;
+  return EXIT_SUCCESS;
 }

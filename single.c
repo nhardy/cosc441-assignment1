@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 static signed long long int total = 0;
 
@@ -10,4 +11,5 @@ int main() {
   }
 
   printf("%lld\n", total);
+  return EXIT_SUCCESS;
 }
